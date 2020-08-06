@@ -1,0 +1,24 @@
+{
+  "name": "task_track_down",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shakirzhan/task_track_down.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shakirzhan/task_track_down/issues"
+  },
+  "homepage": "https://github.com/Shakirzhan/task_track_down#readme",
+  "devDependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "soap": "^0.32.0"
+  }
+}

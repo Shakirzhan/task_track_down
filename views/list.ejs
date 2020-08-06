@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+.container {
+  display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 640px;
+    margin: 12px auto 18px;
+}
+.main-input {
+  position: relative;
+    height: 42px;
+    font-size: 18px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 1px inset;
+    display: flex;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-image: initial;
+    transition: border-color 0.1s ease-in-out 0s;
+    padding: 0px 28px 0px 11px;
+    outline: none 0px;
+}
+
+.submit {
+  background: linear-gradient(rgb(1, 99, 196), rgb(1, 80, 159));
+  text-align: center;
+  border-color: rgb(204, 204, 204);
+  color: #fff;
+  padding: 0px 28px 0px 11px;
+  height: 42px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.submit:hover {
+  background: linear-gradient(rgb(1, 112, 221), rgb(1, 80, 159));
+}
+
+.list {
+  padding: 0px 24px 24px;
+    border-top: 1px solid rgb(230, 230, 230);
+}
+.item {
+  margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.caps {
+  font-size: 18px;
+    line-height: 24px;
+    color: rgb(51, 51, 51);
+    padding-bottom: 3px;
+    font-weight: normal;
+    margin: 0px;
+}
+
+.desc {
+  font-size: 14px;
+    padding-top: 0px;
+    display: flex;
+    width: 100%;
+    color: rgb(153, 153, 153);
+    flex-direction: column;
+    padding-bottom: 42px;
+}
+body {
+  font-family: Arial;
+}
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <input type="text" class="main-input" placeholder="Введите трек-номер" />
+    <input type="submit" value="Отследить" class="submit" />
+    <div class="list">
+      
+    </div>
+  </div>
+
+ 
+
+
+  <script>
+//EJ000385249RU
+    const submit = document.querySelector('.submit');
+
+    const mainInput = document.querySelector('.main-input');
+
+    submit.onclick = () => {
+      axios.get('http://shakirtask.beget.tech/api.php?Barcode='+mainInput.value)
+      .then(function (response) {
+        // handle success
+        
+
+        let html = '';
+
+        response.data.forEach(element => {
+          if(element.Name) {
+            html = html + '<div class="item"> <span class="caps">'+ element.Name +'</span> <span class="desc">'+ element.OperDate +'</span> </div>';
+          }
+        });
+
+        document.querySelector('.list').innerHTML = html;
+      })
+    }
+
+    
+  </script>
+</body>
+</html>
