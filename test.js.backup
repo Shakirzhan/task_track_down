@@ -1,0 +1,41 @@
+
+var SoapClient = require('soap');
+var options = {
+  'trace': 1,
+  "overrideRootElement": {
+      "namespace": "myns",
+      "xmlnsAttributes": [{
+          "name": "xmlns:ns2",
+          "value": "http://russianpost.org/operationhistory"
+      }]
+  },
+  forceSoap12Headers: true,
+  connection: 'keep-alive',
+  'soap_version': 2
+};
+
+
+
+SoapClient.createClient('./example.wsdl', options, function (err, client) {
+  client.getOperationHistory(
+    {
+      'ns1:OperationHistoryRequest': {
+          'ns1:Barcode': 'EJ000385249RU',
+          'ns1:MessageType': 0,
+          'ns1:Language': 'RUS',
+      },
+      'ns1:AuthorizationHeader': {
+          'ns1:login': 'ptKXgCyjzWMInE',
+          'ns1:password': 'KOgUrtw94459',
+      },
+  },
+  (err, result) => {
+      if (err) {
+          console.log(111);
+          console.log(err);
+          
+          return;
+      }
+      
+      //console.log(result.OperationHistoryData);
+  })});
