@@ -98,19 +98,21 @@ body {
     const mainInput = document.querySelector('.main-input');
 
     submit.onclick = () => {
-      axios.get('http://localhost:3000/'+mainInput.value)
+      axios.get('http://localhost:3001/'+mainInput.value)
       .then(function (response) {
         // handle success
         
-
         let html = '';
-        let json = response.data.toString();
-        json = JSON.parse(json);
-        console.log(json);
-        
-        json.historyRecord.forEach(element => {
-          if(element.OperationParameters.OperAttr.Name) {
-            html = html + '<div class="item"> <span class="caps">'+ element.OperationParameters.OperAttr.Name +'</span> <span class="desc">'+ element.OperationParameters.OperDate +'</span> </div>';
+
+        let json = JSON.parse(response.data);
+
+        json = json.list[0].trackingItem.trackingHistoryItemList;
+
+        console.log( json );
+
+        json.forEach(element => {
+          if(element.humanStatus) {
+            html = html + '<div class="item"> <span class="caps">'+ element.humanStatus +'</span> <span class="desc">'+ element.date +'</span> </div>';
           }
         });
 
